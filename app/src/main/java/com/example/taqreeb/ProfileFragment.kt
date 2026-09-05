@@ -1,5 +1,6 @@
 package com.example.taqreeb
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +10,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() {
+
+    private lateinit var profileName: TextView
+    private lateinit var profileEmail: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,11 +29,11 @@ class ProfileFragment : Fragment() {
             false
         )
 
-        val profileName = view.findViewById<TextView>(
+        profileName = view.findViewById(
             R.id.txtProfileName
         )
 
-        val profileEmail = view.findViewById<TextView>(
+        profileEmail = view.findViewById(
             R.id.txtProfileEmail
         )
 
@@ -40,26 +45,8 @@ class ProfileFragment : Fragment() {
             R.id.btnLogout
         )
 
-        // Get saved user information
-        val preferences = requireContext().getSharedPreferences(
-            "TaqreebData",
-            Context.MODE_PRIVATE
-        )
 
-        val savedName = preferences.getString(
-            "name",
-            "User"
-        )
-
-        val savedEmail = preferences.getString(
-            "email",
-            "No email"
-        )
-
-        // Display user information
-        profileName.text = savedName
-        profileEmail.text = savedEmail
-
+        // Edit Profile
 
         editProfileButton.setOnClickListener {
 
@@ -73,18 +60,72 @@ class ProfileFragment : Fragment() {
 
 
         // Logout
+
         logoutButton.setOnClickListener {
 
-            val intent = Intent(
-                requireContext(),
-                LoginActivity::class.java
-            )
+            AlertDialog.Builder(requireContext())
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Yes") { _, _ ->
 
-            startActivity(intent)
+                    // Sign out from Firebase
 
-            requireActivity().finish()
+                    FirebaseAuth.getInstance().signOut()
+
+
+                    // Go to Login
+
+                    val intent = Intent(
+                        requireContext(),
+                        LoginActivity::class.java
+                    )
+
+                    startActivity(intent)
+
+                    requireActivity().finish()
+                }
+                .setNegativeButton("No", null)
+                .show()
         }
+
 
         return view
     }
+
+
+    // Refresh profile information
+
+    override fun onResume() {
+        super.onResume()
+
+        // Get SharedPreferences
+
+        val preferences = requireContext()
+            .getSharedPreferences(
+                "TaqreebData",
+                Context.MODE_PRIVATE
+            )
+
+
+        // Get name from SharedPreferences
+
+        val savedName = preferences.getString(
+            "name",
+            "User"
+        )
+
+
+        // Get email from Firebase
+
+        val firebaseUser =
+            FirebaseAuth.getInstance().currentUser
+
+        val savedEmail =
+            firebaseUser?.email ?: "No email"
+
+
+        profileName.text = savedName
+        profileEmail.text = savedEmail
+    }
 }
+

@@ -7,28 +7,57 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class SignupActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_signup)
 
-        val name = findViewById<EditText>(R.id.edtName)
-        val email = findViewById<EditText>(R.id.edtSignupEmail)
-        val password = findViewById<EditText>(R.id.edtSignupPassword)
-        val confirmPassword = findViewById<EditText>(R.id.edtConfirmPassword)
+        // Firebase Authentication
+        auth = FirebaseAuth.getInstance()
 
-        val createAccount = findViewById<Button>(R.id.btnCreateAccount)
-        val backToLogin = findViewById<TextView>(R.id.txtBackToLogin)
+        val name = findViewById<EditText>(
+            R.id.edtName
+        )
+
+        val email = findViewById<EditText>(
+            R.id.edtSignupEmail
+        )
+
+        val password = findViewById<EditText>(
+            R.id.edtSignupPassword
+        )
+
+        val confirmPassword = findViewById<EditText>(
+            R.id.edtConfirmPassword
+        )
+
+        val createAccount = findViewById<Button>(
+            R.id.btnCreateAccount
+        )
+
+        val backToLogin = findViewById<TextView>(
+            R.id.txtBackToLogin
+        )
+
+
+        // Create Account
 
         createAccount.setOnClickListener {
 
-            val enteredName = name.text.toString()
-            val enteredEmail = email.text.toString()
+            val enteredName = name.text.toString().trim()
+            val enteredEmail = email.text.toString().trim()
             val enteredPassword = password.text.toString()
-            val enteredConfirmPassword = confirmPassword.text.toString()
+            val enteredConfirmPassword =
+                confirmPassword.text.toString()
+
+
+            // Check empty fields
 
             if (enteredName.isEmpty() ||
                 enteredEmail.isEmpty() ||
@@ -42,7 +71,11 @@ class SignupActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
 
-            } else if (enteredPassword != enteredConfirmPassword) {
+            }
+
+            // Check passwords
+
+            else if (enteredPassword != enteredConfirmPassword) {
 
                 Toast.makeText(
                     this,
@@ -50,35 +83,81 @@ class SignupActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
 
-            } else {
+            }
 
-                val preferences = getSharedPreferences(
-                    "TaqreebData",
-                    MODE_PRIVATE
+            else {
+
+                // Create Firebase account
+
+                auth.createUserWithEmailAndPassword(
+                    enteredEmail,
+                    enteredPassword
                 )
+                    .addOnCompleteListener { task ->
 
-                preferences.edit()
-                    .putString("name", enteredName)
-                    .putString("email", enteredEmail)
-                    .putString("password", enteredPassword)
-                    .apply()
+                        if (task.isSuccessful) {
 
-                Toast.makeText(
-                    this,
-                    "Account created successfully",
-                    Toast.LENGTH_SHORT
-                ).show()
+                            // Keep user information in SharedPreferences
 
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
+                            val preferences =
+                                getSharedPreferences(
+                                    "TaqreebData",
+                                    MODE_PRIVATE
+                                )
 
-                finish()
+                            preferences.edit()
+                                .putString(
+                                    "name",
+                                    enteredName
+                                )
+                                .putString(
+                                    "email",
+                                    enteredEmail
+                                )
+                                .apply()
+
+
+                            Toast.makeText(
+                                this,
+                                "Account created successfully!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+
+                            // Go to Login
+
+                            val intent = Intent(
+                                this,
+                                LoginActivity::class.java
+                            )
+
+                            startActivity(intent)
+
+                            finish()
+
+                        } else {
+
+                            Toast.makeText(
+                                this,
+                                task.exception?.message
+                                    ?: "Account creation failed",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
             }
         }
 
+
+        // Back to Login
+
         backToLogin.setOnClickListener {
 
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(
+                this,
+                LoginActivity::class.java
+            )
+
             startActivity(intent)
 
             finish()

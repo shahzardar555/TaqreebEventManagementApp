@@ -28,6 +28,7 @@ class EventsFragment : Fragment() {
         )
 
         // Buttons and views
+
         val detailsButton = view.findViewById<Button>(
             R.id.btnEventDetails
         )
@@ -44,8 +45,20 @@ class EventsFragment : Fragment() {
             R.id.eventsContainer
         )
 
+        val noEvents = view.findViewById<TextView>(
+            R.id.txtNoEvents
+        )
+
+        val eventsHeading = view.findViewById<TextView>(
+            R.id.txtEventsHeading
+        )
+
 
         // Category buttons
+
+        val allEventsButton = view.findViewById<Button>(
+            R.id.btnAllEvents
+        )
 
         val universityButton = view.findViewById<Button>(
             R.id.btnUniversity
@@ -94,7 +107,7 @@ class EventsFragment : Fragment() {
         }
 
 
-        // Create database object
+        // Database
 
         val database = DatabaseHandler(
             requireContext()
@@ -107,171 +120,180 @@ class EventsFragment : Fragment() {
 
             eventsContainer.removeAllViews()
 
-            for (event in events) {
+            if (events.isEmpty()) {
 
-                val eventCard = CardView(
-                    requireContext()
-                )
+                noEvents.visibility = View.VISIBLE
 
-                eventCard.layoutParams =
-                    LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                    ).apply {
+            } else {
 
-                        setMargins(
-                            0,
-                            12,
-                            0,
-                            12
+                noEvents.visibility = View.GONE
+
+                for (event in events) {
+
+                    val eventCard = CardView(
+                        requireContext()
+                    )
+
+                    eventCard.layoutParams =
+                        LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                        ).apply {
+
+                            setMargins(
+                                0,
+                                12,
+                                0,
+                                12
+                            )
+                        }
+
+                    eventCard.radius = 16f
+                    eventCard.cardElevation = 5f
+
+
+                    val cardLayout = LinearLayout(
+                        requireContext()
+                    )
+
+                    cardLayout.orientation =
+                        LinearLayout.VERTICAL
+
+                    cardLayout.setPadding(
+                        18,
+                        18,
+                        18,
+                        18
+                    )
+
+
+                    // Event name
+
+                    val name = TextView(
+                        requireContext()
+                    )
+
+                    name.text = event[0]
+                    name.textSize = 20f
+
+                    name.setTypeface(
+                        null,
+                        android.graphics.Typeface.BOLD
+                    )
+
+
+                    // Date
+
+                    val date = TextView(
+                        requireContext()
+                    )
+
+                    date.text = "📅 ${event[1]}"
+                    date.textSize = 15f
+
+                    date.setPadding(
+                        0,
+                        10,
+                        0,
+                        0
+                    )
+
+
+                    // Location
+
+                    val location = TextView(
+                        requireContext()
+                    )
+
+                    location.text = "📍 ${event[2]}"
+                    location.textSize = 15f
+
+                    location.setPadding(
+                        0,
+                        5,
+                        0,
+                        0
+                    )
+
+
+                    // Category
+
+                    val category = TextView(
+                        requireContext()
+                    )
+
+                    category.text =
+                        "Category: ${event[3]}"
+
+                    category.textSize = 15f
+
+                    category.setPadding(
+                        0,
+                        5,
+                        0,
+                        0
+                    )
+
+
+                    // Details button
+
+                    val details = Button(
+                        requireContext()
+                    )
+
+                    details.text = "VIEW DETAILS"
+
+                    details.setOnClickListener {
+
+                        val intent = Intent(
+                            requireContext(),
+                            EventDetailsActivity::class.java
                         )
+
+                        intent.putExtra(
+                            "searchEvent",
+                            true
+                        )
+
+                        intent.putExtra(
+                            "eventName",
+                            event[0]
+                        )
+
+                        intent.putExtra(
+                            "eventDate",
+                            event[1]
+                        )
+
+                        intent.putExtra(
+                            "eventLocation",
+                            event[2]
+                        )
+
+                        intent.putExtra(
+                            "eventCategory",
+                            event[3]
+                        )
+
+                        intent.putExtra(
+                            "eventDescription",
+                            event[4]
+                        )
+
+                        startActivity(intent)
                     }
 
-                eventCard.radius = 16f
-                eventCard.cardElevation = 5f
 
+                    cardLayout.addView(name)
+                    cardLayout.addView(date)
+                    cardLayout.addView(location)
+                    cardLayout.addView(category)
+                    cardLayout.addView(details)
 
-                val cardLayout = LinearLayout(
-                    requireContext()
-                )
+                    eventCard.addView(cardLayout)
 
-                cardLayout.orientation =
-                    LinearLayout.VERTICAL
-
-                cardLayout.setPadding(
-                    18,
-                    18,
-                    18,
-                    18
-                )
-
-
-                // Event name
-
-                val name = TextView(
-                    requireContext()
-                )
-
-                name.text = event[0]
-                name.textSize = 20f
-
-                name.setTypeface(
-                    null,
-                    android.graphics.Typeface.BOLD
-                )
-
-
-                // Date
-
-                val date = TextView(
-                    requireContext()
-                )
-
-                date.text = "📅 ${event[1]}"
-                date.textSize = 15f
-
-                date.setPadding(
-                    0,
-                    10,
-                    0,
-                    0
-                )
-
-
-                // Location
-
-                val location = TextView(
-                    requireContext()
-                )
-
-                location.text = "📍 ${event[2]}"
-                location.textSize = 15f
-
-                location.setPadding(
-                    0,
-                    5,
-                    0,
-                    0
-                )
-
-
-                // Category
-
-                val category = TextView(
-                    requireContext()
-                )
-
-                category.text =
-                    "Category: ${event[3]}"
-
-                category.textSize = 15f
-
-                category.setPadding(
-                    0,
-                    5,
-                    0,
-                    0
-                )
-
-
-                // Details button
-
-                val details = Button(
-                    requireContext()
-                )
-
-                details.text = "VIEW DETAILS"
-
-                details.setOnClickListener {
-
-                    val intent = Intent(
-                        requireContext(),
-                        EventDetailsActivity::class.java
-                    )
-
-                    intent.putExtra(
-                        "searchEvent",
-                        true
-                    )
-
-                    intent.putExtra(
-                        "eventName",
-                        event[0]
-                    )
-
-                    intent.putExtra(
-                        "eventDate",
-                        event[1]
-                    )
-
-                    intent.putExtra(
-                        "eventLocation",
-                        event[2]
-                    )
-
-                    intent.putExtra(
-                        "eventCategory",
-                        event[3]
-                    )
-
-                    intent.putExtra(
-                        "eventDescription",
-                        event[4]
-                    )
-
-                    startActivity(intent)
+                    eventsContainer.addView(eventCard)
                 }
-
-
-                cardLayout.addView(name)
-                cardLayout.addView(date)
-                cardLayout.addView(location)
-                cardLayout.addView(category)
-                cardLayout.addView(details)
-
-                eventCard.addView(cardLayout)
-
-                eventsContainer.addView(eventCard)
             }
         }
 
@@ -283,6 +305,78 @@ class EventsFragment : Fragment() {
         displayEvents(allEvents)
 
 
+        // All Events button
+
+        allEventsButton.setOnClickListener {
+
+            eventsHeading.text = "All Events"
+
+            displayEvents(
+                database.getAllEvents()
+            )
+        }
+
+
+        // University category
+
+        universityButton.setOnClickListener {
+
+            eventsHeading.text = "University Events"
+
+            displayEvents(
+                database.getEventsByCategory("University")
+            )
+        }
+
+
+        // Sports category
+
+        sportsButton.setOnClickListener {
+
+            eventsHeading.text = "Sports Events"
+
+            displayEvents(
+                database.getEventsByCategory("Sports")
+            )
+        }
+
+
+        // Business category
+
+        businessButton.setOnClickListener {
+
+            eventsHeading.text = "Business Events"
+
+            displayEvents(
+                database.getEventsByCategory("Business")
+            )
+        }
+
+
+        // Concerts category
+
+        concertsButton.setOnClickListener {
+
+            eventsHeading.text = "Concerts"
+
+            displayEvents(
+                database.getEventsByCategory("Concerts")
+            )
+        }
+
+
+        // Weddings category
+
+        weddingsButton.setOnClickListener {
+
+            eventsHeading.text = "Weddings"
+
+            displayEvents(
+                database.getEventsByCategory("Weddings")
+            )
+        }
+
+
         // Search Events
 
         searchText.setOnEditorActionListener { _, _, _ ->
@@ -291,7 +385,11 @@ class EventsFragment : Fragment() {
 
             if (text.isEmpty()) {
 
-                displayEvents(allEvents)
+                eventsHeading.text = "All Events"
+
+                displayEvents(
+                    database.getAllEvents()
+                )
 
             } else {
 
@@ -299,6 +397,10 @@ class EventsFragment : Fragment() {
                     database.searchAllEvents(text)
 
                 if (results.isEmpty()) {
+
+                    noEvents.visibility = View.VISIBLE
+
+                    eventsContainer.removeAllViews()
 
                     Toast.makeText(
                         requireContext(),
@@ -308,66 +410,15 @@ class EventsFragment : Fragment() {
 
                 } else {
 
+                    noEvents.visibility = View.GONE
+
+                    eventsHeading.text = "Search Results"
+
                     displayEvents(results)
                 }
             }
 
             true
-        }
-
-
-        // University category
-
-        universityButton.setOnClickListener {
-
-            val results =
-                database.getEventsByCategory("University")
-
-            displayEvents(results)
-        }
-
-
-        // Sports category
-
-        sportsButton.setOnClickListener {
-
-            val results =
-                database.getEventsByCategory("Sports")
-
-            displayEvents(results)
-        }
-
-
-        // Business category
-
-        businessButton.setOnClickListener {
-
-            val results =
-                database.getEventsByCategory("Business")
-
-            displayEvents(results)
-        }
-
-
-        // Concerts category
-
-        concertsButton.setOnClickListener {
-
-            val results =
-                database.getEventsByCategory("Concerts")
-
-            displayEvents(results)
-        }
-
-
-        // Weddings category
-
-        weddingsButton.setOnClickListener {
-
-            val results =
-                database.getEventsByCategory("Weddings")
-
-            displayEvents(results)
         }
 
 
