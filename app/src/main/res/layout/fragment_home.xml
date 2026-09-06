@@ -5,92 +5,295 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA">
+    android:background="#F4F7F5"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:paddingBottom="30dp">
 
-        <!-- App Name -->
+
+        <!-- ========================= -->
+        <!-- HERO SECTION -->
+        <!-- ========================= -->
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardBackgroundColor="#0B6B3A"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Top Row -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Taqreeb.pk"
+                            android:textColor="#FFFFFF"
+                            android:textSize="28sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Har Taqreeb, Ek Jagah."
+                            android:textColor="#D8F0E2"
+                            android:textSize="14sp"
+                            android:layout_marginTop="3dp" />
+
+                    </LinearLayout>
+
+                    <!-- Profile Icon -->
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="👤"
+                        android:textSize="25sp"
+                        android:background="#FFFFFF" />
+
+                </LinearLayout>
+
+
+                <!-- Welcome -->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Find your next\nmemorable event."
+                    android:textColor="#FFFFFF"
+                    android:textSize="27sp"
+                    android:textStyle="bold"
+                    android:lineSpacingExtra="2dp"
+                    android:layout_marginTop="30dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Discover exciting events, connect with people and make every gathering special."
+                    android:textColor="#D8F0E2"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="3dp"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- ========================= -->
+        <!-- SEARCH SECTION -->
+        <!-- ========================= -->
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Taqreeb.pk"
-            android:textColor="#0B6B3A"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Har Taqreeb, Ek Jagah."
-            android:textColor="#666666"
-            android:textSize="15sp"
-            android:layout_marginTop="3dp" />
-
-
-        <!-- Welcome -->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Find your next event 👋"
+            android:text="What are you looking for?"
             android:textColor="#222222"
-            android:textSize="23sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginTop="28dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Discover events happening around you."
-            android:textColor="#777777"
-            android:textSize="14sp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="4dp" />
 
 
-        <!-- Search Bar -->
-
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp">
+            android:layout_height="58dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp">
 
-            <EditText
-                android:id="@+id/edtSearch"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="Search events..."
-                android:padding="14dp"
-                android:background="@android:drawable/editbox_background" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-            <Button
-                android:id="@+id/btnSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="SEARCH"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="#0B6B3A"
-                android:layout_marginStart="8dp" />
+                <EditText
+                    android:id="@+id/edtSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="Search events..."
+                    android:textColor="#222222"
+                    android:textColorHint="#555555"
+                    android:textSize="15sp"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="8dp"
+                    android:background="@android:color/transparent" />
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/btnSearch"
+                    android:layout_width="105dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="SEARCH"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="#0B6B3A" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
-        <!-- Upcoming Events -->
+        <!-- ========================= -->
+        <!-- QUICK CATEGORIES -->
+        <!-- ========================= -->
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Upcoming Events"
+            android:text="Explore Categories"
             android:textColor="#222222"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginTop="30dp" />
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp" />
+
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:gravity="center"
+                    android:text="🎓 University"
+                    android:textColor="#0B6B3A"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:background="#E1F2E8" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:gravity="center"
+                    android:text="⚽ Sports"
+                    android:textColor="#0B6B3A"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:layout_marginStart="10dp"
+                    android:background="#E1F2E8" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:gravity="center"
+                    android:text="💼 Business"
+                    android:textColor="#0B6B3A"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:layout_marginStart="10dp"
+                    android:background="#E1F2E8" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:gravity="center"
+                    android:text="🎵 Concerts"
+                    android:textColor="#0B6B3A"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:layout_marginStart="10dp"
+                    android:background="#E1F2E8" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:gravity="center"
+                    android:text="💍 Weddings"
+                    android:textColor="#0B6B3A"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:layout_marginStart="10dp"
+                    android:background="#E1F2E8" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+
+        <!-- ========================= -->
+        <!-- FEATURED EVENT -->
+        <!-- ========================= -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Featured Event"
+                android:textColor="#222222"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View all →"
+                android:textColor="#0B6B3A"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
 
         <!-- Event Card -->
@@ -98,61 +301,129 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:cardCornerRadius="18dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="14dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="22dp"
             app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:background="#FFFFFF">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tech Innovation Summit"
-                    android:textColor="#222222"
-                    android:textSize="21sp"
-                    android:textStyle="bold" />
+                <!-- Event Banner -->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📅 12 September 2026"
-                    android:textColor="#555555"
-                    android:textSize="15sp"
-                    android:layout_marginTop="12dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📍 Lahore"
-                    android:textColor="#555555"
-                    android:textSize="15sp"
-                    android:layout_marginTop="6dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="💻 Technology &amp; Innovation"
-                    android:textColor="#555555"
-                    android:textSize="15sp"
-                    android:layout_marginTop="6dp" />
-
-                <Button
-                    android:id="@+id/btnViewEvent"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="VIEW EVENT"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:backgroundTint="#0B6B3A"
-                    android:layout_marginTop="18dp" />
+                    android:layout_height="105dp"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:background="#E1F2E8">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="FEATURED"
+                        android:textColor="#0B6B3A"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Technology &amp; Innovation"
+                        android:textColor="#0B6B3A"
+                        android:textSize="21sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp" />
+
+                </LinearLayout>
+
+
+                <!-- Event Information -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tech Innovation Summit"
+                        android:textColor="#222222"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="📅 12 September 2026"
+                        android:textColor="#555555"
+                        android:textSize="15sp"
+                        android:layout_marginTop="13dp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="📍 Lahore"
+                        android:textColor="#555555"
+                        android:textSize="15sp"
+                        android:layout_marginTop="7dp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="💻 University • Technology"
+                        android:textColor="#0B6B3A"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="7dp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Join students, developers and technology enthusiasts for a day of innovation, networking and learning."
+                        android:textColor="#666666"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="3dp"
+                        android:layout_marginTop="14dp" />
+
+
+                    <!-- View Event -->
+
+                    <Button
+                        android:id="@+id/btnViewEvent"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:text="VIEW EVENT"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:backgroundTint="#0B6B3A"
+                        android:layout_marginTop="18dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
+
+        <!-- Bottom Space -->
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
     </LinearLayout>
 

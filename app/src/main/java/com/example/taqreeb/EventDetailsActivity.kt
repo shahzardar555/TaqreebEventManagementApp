@@ -1,5 +1,7 @@
 package com.example.taqreeb
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -37,12 +39,21 @@ class EventDetailsActivity : AppCompatActivity() {
             R.id.btnRegister
         )
 
+        val locationButton = findViewById<Button>(
+            R.id.btnViewLocation
+        )
+
+        val callButton = findViewById<Button>(
+            R.id.btnCallOrganizer
+        )
+
         val backButton = findViewById<Button>(
             R.id.btnBack
         )
 
 
         // Get SharedPreferences
+
         val preferences = getSharedPreferences(
             "TaqreebData",
             MODE_PRIVATE
@@ -50,6 +61,7 @@ class EventDetailsActivity : AppCompatActivity() {
 
 
         // Check if this is the user-created event
+
         val isCreatedEvent = intent.getBooleanExtra(
             "createdEvent",
             false
@@ -57,6 +69,7 @@ class EventDetailsActivity : AppCompatActivity() {
 
 
         // Check if an event was sent through Intent
+
         val hasSearchEvent = intent.getBooleanExtra(
             "searchEvent",
             false
@@ -143,6 +156,45 @@ class EventDetailsActivity : AppCompatActivity() {
                 "Registration successful!",
                 Toast.LENGTH_SHORT
             ).show()
+        }
+
+
+        // View Location
+        // This is an Implicit Intent
+
+        locationButton.setOnClickListener {
+
+            val location = eventLocation.text.toString()
+
+            val mapUri = Uri.parse(
+                "geo:0,0?q=$location"
+            )
+
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                mapUri
+            )
+
+            startActivity(intent)
+        }
+
+
+        // Call Organizer
+        // This is an Implicit Intent
+
+        callButton.setOnClickListener {
+
+            val phoneNumber = "03001234567"
+
+            val intent = Intent(
+                Intent.ACTION_DIAL
+            )
+
+            intent.data = Uri.parse(
+                "tel:$phoneNumber"
+            )
+
+            startActivity(intent)
         }
 
 

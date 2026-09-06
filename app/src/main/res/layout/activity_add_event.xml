@@ -12,6 +12,8 @@
         android:orientation="vertical"
         android:padding="24dp">
 
+        <!-- Heading -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,62 +31,84 @@
             android:textColor="#666666"
             android:layout_marginBottom="24dp" />
 
+
+        <!-- Event Name -->
+
         <EditText
             android:id="@+id/edtEventName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:hint="Event Name"
-            android:inputType="text"
+            android:textColorHint="#555555"
+            android:inputType="textCapSentences"
             android:padding="14dp"
             android:layout_marginBottom="12dp" />
+
+
+        <!-- Event Date -->
 
         <EditText
             android:id="@+id/edtEventDate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Event Date"
-            android:inputType="text"
+            android:layout_height="55dp"
+            android:hint="Select Event Date"
+            android:textColorHint="#555555"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none"
             android:padding="14dp"
+            android:drawableStart="@android:drawable/ic_menu_my_calendar"
             android:layout_marginBottom="12dp" />
+
+
+        <!-- Location -->
 
         <EditText
             android:id="@+id/edtEventLocation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Location"
-            android:inputType="text"
+            android:layout_height="55dp"
+            android:hint="Event Location"
+            android:textColorHint="#555555"
+            android:inputType="textCapSentences"
             android:padding="14dp"
             android:layout_marginBottom="12dp" />
 
-        <EditText
+
+        <!-- Category -->
+
+        <Spinner
             android:id="@+id/edtEventCategory"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Category"
-            android:inputType="text"
-            android:padding="14dp"
+            android:layout_height="55dp"
             android:layout_marginBottom="12dp" />
+
+
+        <!-- Description -->
 
         <EditText
             android:id="@+id/edtEventDescription"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:hint="Event Description"
-            android:gravity="top"
-            android:inputType="textMultiLine"
+            android:textColorHint="#555555"
+            android:gravity="top|start"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="4"
             android:padding="14dp"
             android:layout_marginBottom="20dp" />
+
+
+        <!-- Create Event -->
 
         <Button
             android:id="@+id/btnCreateEvent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:text="CREATE EVENT"
             android:textSize="16sp"
             android:textStyle="bold"
             android:backgroundTint="#0B6B3A"
-            android:textColor="#FFFFFF"
-            android:padding="14dp" />
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 

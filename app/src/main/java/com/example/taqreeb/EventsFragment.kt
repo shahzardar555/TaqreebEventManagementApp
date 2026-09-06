@@ -148,8 +148,12 @@ class EventsFragment : Fragment() {
                             )
                         }
 
+                    // Card appearance
                     eventCard.radius = 16f
                     eventCard.cardElevation = 5f
+                    eventCard.setCardBackgroundColor(
+                        android.graphics.Color.WHITE
+                    )
 
 
                     val cardLayout = LinearLayout(
@@ -166,6 +170,11 @@ class EventsFragment : Fragment() {
                         18
                     )
 
+                    // Make inside of card white
+                    cardLayout.setBackgroundColor(
+                        android.graphics.Color.WHITE
+                    )
+
 
                     // Event name
 
@@ -175,6 +184,13 @@ class EventsFragment : Fragment() {
 
                     name.text = event[0]
                     name.textSize = 20f
+                    name.setTextColor(
+                        android.graphics.Color.rgb(
+                            34,
+                            34,
+                            34
+                        )
+                    )
 
                     name.setTypeface(
                         null,
@@ -190,6 +206,13 @@ class EventsFragment : Fragment() {
 
                     date.text = "📅 ${event[1]}"
                     date.textSize = 15f
+                    date.setTextColor(
+                        android.graphics.Color.rgb(
+                            85,
+                            85,
+                            85
+                        )
+                    )
 
                     date.setPadding(
                         0,
@@ -207,6 +230,13 @@ class EventsFragment : Fragment() {
 
                     location.text = "📍 ${event[2]}"
                     location.textSize = 15f
+                    location.setTextColor(
+                        android.graphics.Color.rgb(
+                            85,
+                            85,
+                            85
+                        )
+                    )
 
                     location.setPadding(
                         0,
@@ -226,6 +256,13 @@ class EventsFragment : Fragment() {
                         "Category: ${event[3]}"
 
                     category.textSize = 15f
+                    category.setTextColor(
+                        android.graphics.Color.rgb(
+                            85,
+                            85,
+                            85
+                        )
+                    )
 
                     category.setPadding(
                         0,

@@ -2,17 +2,21 @@
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA">
+    android:background="#F8F9FA"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:paddingBottom="30dp">
 
-        <!-- Heading -->
+
+        <!-- Page Heading -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,40 +41,78 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="5dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:padding="25dp">
+                android:padding="25dp"
+                android:background="#FFFFFF">
 
-                <!-- Profile Icon -->
 
-                <TextView
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:gravity="center"
-                    android:text="👤"
-                    android:textSize="38sp"
-                    android:background="#E8F5EE" />
+                <!-- Profile Picture Circle -->
 
-                <!-- Name -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    app:cardBackgroundColor="#0B6B3A"
+                    app:cardCornerRadius="60dp"
+                    app:cardElevation="3dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="112dp"
+                        android:layout_height="112dp"
+                        android:layout_gravity="center"
+                        app:cardBackgroundColor="#E8F5EE"
+                        app:cardCornerRadius="56dp"
+                        app:cardElevation="0dp">
+
+                        <ImageView
+                            android:id="@+id/imgProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@android:drawable/ic_menu_camera"
+                            android:scaleType="centerCrop"
+                            android:padding="22dp"
+                            android:contentDescription="Profile Picture" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <!-- Change Photo Button -->
+
+                <Button
+                    android:id="@+id/btnChangePhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:text="CHANGE PHOTO"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="#0B6B3A"
+                    android:backgroundTint="#E8F5EE"
+                    android:layout_marginTop="14dp" />
+
+
+                <!-- User Name -->
 
                 <TextView
                     android:id="@+id/txtProfileName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="User"
-                    android:textSize="23sp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     android:textColor="#222222"
-                    android:layout_marginTop="15dp" />
+                    android:layout_marginTop="18dp" />
 
-                <!-- Email -->
+
+                <!-- User Email -->
 
                 <TextView
                     android:id="@+id/txtProfileEmail"
@@ -94,6 +136,19 @@
             android:layout_height="52dp"
             android:layout_marginTop="22dp"
             android:text="EDIT PROFILE"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#0B6B3A" />
+
+
+        <!-- Share Taqreeb -->
+
+        <Button
+            android:id="@+id/btnShareTaqreeb"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            android:text="SHARE TAQREEB"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:backgroundTint="#0B6B3A" />

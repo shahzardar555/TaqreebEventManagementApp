@@ -5,222 +5,435 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA">
+    android:background="#F7F8FA"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
-
-        <!-- Heading -->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Explore Events"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:textColor="#0B6B3A" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Find events that interest you"
-            android:textSize="15sp"
-            android:textColor="#666666"
-            android:layout_marginTop="4dp" />
+        android:paddingBottom="30dp">
 
 
-        <!-- Search -->
+        <!-- TOP BAR -->
 
-        <EditText
-            android:id="@+id/edtEventSearch"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginTop="20dp"
-            android:hint="Search events..."
-            android:padding="14dp"
-            android:background="@android:drawable/editbox_background" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="22dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EXPLORE"
+                    android:textColor="#0B6B3A"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.15" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Events"
+                    android:textColor="#181818"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="2dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:text="📅"
+                android:textSize="24sp"
+                android:background="#E4F2EA" />
+
+        </LinearLayout>
 
 
-        <!-- Create Event -->
+        <!-- SUBTITLE -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Find something worth showing up for."
+            android:textColor="#777777"
+            android:textSize="15sp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="3dp" />
+
+
+        <!-- SEARCH -->
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="22dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="2dp">
+
+            <EditText
+                android:id="@+id/edtEventSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Search by event or category"
+                android:textColor="#222222"
+                android:textColorHint="#555555"
+                android:textSize="14sp"
+                android:singleLine="true"
+                android:inputType="text"
+                android:imeOptions="actionSearch"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:background="@android:color/transparent" />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- CREATE EVENT -->
 
         <Button
             android:id="@+id/btnAddEvent"
             android:layout_width="match_parent"
             android:layout_height="52dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="12dp"
-            android:text="CREATE EVENT"
+            android:text="+  CREATE AN EVENT"
             android:textColor="#FFFFFF"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:backgroundTint="#0B6B3A" />
 
 
-        <!-- Categories -->
+        <!-- FEATURED SECTION -->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Categories"
-            android:textSize="21sp"
-            android:textStyle="bold"
-            android:textColor="#222222"
-            android:layout_marginTop="28dp" />
-
-        <HorizontalScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:scrollbars="none">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="28dp">
 
-            <LinearLayout
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Featured"
+                android:textColor="#181818"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:text="TRENDING"
+                android:textColor="#0B6B3A"
+                android:textSize="11sp"
+                android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/btnAllEvents"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:text="All Events" />
-
-                <Button
-                    android:id="@+id/btnUniversity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="8dp"
-                    android:text="University" />
-
-                <Button
-                    android:id="@+id/btnSports"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="8dp"
-                    android:text="Sports" />
-
-                <Button
-                    android:id="@+id/btnBusiness"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="8dp"
-                    android:text="Business" />
-
-                <Button
-                    android:id="@+id/btnConcerts"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="8dp"
-                    android:text="Concerts" />
-
-                <Button
-                    android:id="@+id/btnWeddings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="8dp"
-                    android:text="Weddings" />
-
-            </LinearLayout>
-
-        </HorizontalScrollView>
+        </LinearLayout>
 
 
-        <!-- Events Heading -->
-
-        <TextView
-            android:id="@+id/txtEventsHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="All Events"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="#222222"
-            android:layout_marginTop="28dp" />
-
-
-        <!-- Static Event -->
+        <!-- FEATURED EVENT -->
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="5dp">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:orientation="horizontal"
+                android:background="#FFFFFF">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- DATE BLOCK -->
+
+                <LinearLayout
+                    android:layout_width="82dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="#0B6B3A">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SEP"
+                        android:textColor="#CFE9DA"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12"
+                        android:textColor="#FFFFFF"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="2dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2026"
+                        android:textColor="#CFE9DA"
+                        android:textSize="11sp"
+                        android:layout_marginTop="1dp" />
+
+                </LinearLayout>
+
+
+                <!-- EVENT INFO -->
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Tech Innovation Summit"
-                    android:textSize="21sp"
-                    android:textStyle="bold"
-                    android:textColor="#222222" />
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📅 12 September 2026"
-                    android:textSize="15sp"
-                    android:textColor="#555555"
-                    android:layout_marginTop="12dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="FEATURED EVENT"
+                        android:textColor="#0B6B3A"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.12" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📍 Lahore"
-                    android:textSize="15sp"
-                    android:textColor="#555555"
-                    android:layout_marginTop="6dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tech Innovation Summit"
+                        android:textColor="#181818"
+                        android:textSize="19sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="💻 Technology &amp; Innovation"
-                    android:textSize="15sp"
-                    android:textColor="#555555"
-                    android:layout_marginTop="6dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="📍 Lahore"
+                        android:textColor="#666666"
+                        android:textSize="13sp"
+                        android:layout_marginTop="7dp" />
 
-                <Button
-                    android:id="@+id/btnEventDetails"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="VIEW DETAILS"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:backgroundTint="#0B6B3A"
-                    android:layout_marginTop="18dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="University • Technology"
+                        android:textColor="#777777"
+                        android:textSize="12sp"
+                        android:layout_marginTop="4dp" />
+
+                    <Button
+                        android:id="@+id/btnEventDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:text="VIEW DETAILS"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:backgroundTint="#0B6B3A"
+                        android:layout_marginTop="12dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
 
-        <!-- Dynamic SQLite Events -->
+        <!-- CATEGORIES -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Browse by Category"
+            android:textColor="#181818"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:paddingStart="20dp"
+            android:layout_marginTop="30dp" />
+
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
+
+
+                <Button
+                    android:id="@+id/btnAllEvents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:text="ALL"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="#0B6B3A" />
+
+
+                <Button
+                    android:id="@+id/btnUniversity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp"
+                    android:text="🎓 UNIVERSITY"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+
+                <Button
+                    android:id="@+id/btnSports"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp"
+                    android:text="⚽ SPORTS"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+
+                <Button
+                    android:id="@+id/btnBusiness"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp"
+                    android:text="💼 BUSINESS"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+
+                <Button
+                    android:id="@+id/btnConcerts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp"
+                    android:text="🎵 CONCERTS"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+
+                <Button
+                    android:id="@+id/btnWeddings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp"
+                    android:text="💍 WEDDINGS"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+
+        <!-- EVENT LIST HEADER -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/txtEventsHeading"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="All Events"
+                android:textColor="#181818"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LATEST"
+                android:textColor="#888888"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <!-- DYNAMIC EVENTS -->
 
         <LinearLayout
             android:id="@+id/eventsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            android:layout_marginTop="4dp" />
 
 
-        <!-- No Events Message -->
+        <!-- NO EVENTS -->
 
-        <TextView
-            android:id="@+id/txtNoEvents"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="No events found in this category."
-            android:textSize="16sp"
-            android:textColor="#777777"
-            android:visibility="gone" />
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="2dp">
+
+            <TextView
+                android:id="@+id/txtNoEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="25dp"
+                android:text="No events found in this category."
+                android:textColor="#777777"
+                android:textSize="15sp"
+                android:visibility="gone" />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- BOTTOM SPACE -->
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
     </LinearLayout>
 

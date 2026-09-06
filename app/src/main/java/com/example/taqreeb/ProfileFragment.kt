@@ -3,12 +3,15 @@ package com.example.taqreeb
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 
@@ -16,6 +19,34 @@ class ProfileFragment : Fragment() {
 
     private lateinit var profileName: TextView
     private lateinit var profileEmail: TextView
+    private lateinit var profileImage: ImageView
+
+    // Photo Picker
+    private val photoPicker =
+        registerForActivityResult(
+            ActivityResultContracts.GetContent()
+        ) { uri: Uri? ->
+
+            if (uri != null) {
+
+                profileImage.setImageURI(uri)
+
+                // Save selected photo
+                val preferences = requireContext()
+                    .getSharedPreferences(
+                        "TaqreebData",
+                        Context.MODE_PRIVATE
+                    )
+
+                preferences.edit()
+                    .putString(
+                        "profileImageUri",
+                        uri.toString()
+                    )
+                    .apply()
+            }
+        }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,13 +68,33 @@ class ProfileFragment : Fragment() {
             R.id.txtProfileEmail
         )
 
+        profileImage = view.findViewById(
+            R.id.imgProfile
+        )
+
+        val changePhotoButton = view.findViewById<Button>(
+            R.id.btnChangePhoto
+        )
+
         val editProfileButton = view.findViewById<Button>(
             R.id.btnEditProfile
+        )
+
+        val shareButton = view.findViewById<Button>(
+            R.id.btnShareTaqreeb
         )
 
         val logoutButton = view.findViewById<Button>(
             R.id.btnLogout
         )
+
+
+        // Change Photo
+
+        changePhotoButton.setOnClickListener {
+
+            photoPicker.launch("image/*")
+        }
 
 
         // Edit Profile
@@ -59,6 +110,31 @@ class ProfileFragment : Fragment() {
         }
 
 
+        // Share Taqreeb
+        // This is an Implicit Intent
+
+        shareButton.setOnClickListener {
+
+            val intent = Intent(
+                Intent.ACTION_SEND
+            )
+
+            intent.type = "text/plain"
+
+            intent.putExtra(
+                Intent.EXTRA_TEXT,
+                "Check out Taqreeb.pk - Har Taqreeb, Ek Jagah!"
+            )
+
+            startActivity(
+                Intent.createChooser(
+                    intent,
+                    "Share Taqreeb"
+                )
+            )
+        }
+
+
         // Logout
 
         logoutButton.setOnClickListener {
@@ -68,12 +144,7 @@ class ProfileFragment : Fragment() {
                 .setMessage("Are you sure you want to logout?")
                 .setPositiveButton("Yes") { _, _ ->
 
-                    // Sign out from Firebase
-
                     FirebaseAuth.getInstance().signOut()
-
-
-                    // Go to Login
 
                     val intent = Intent(
                         requireContext(),
@@ -96,9 +167,8 @@ class ProfileFragment : Fragment() {
     // Refresh profile information
 
     override fun onResume() {
-        super.onResume()
 
-        // Get SharedPreferences
+        super.onResume()
 
         val preferences = requireContext()
             .getSharedPreferences(
@@ -126,6 +196,20 @@ class ProfileFragment : Fragment() {
 
         profileName.text = savedName
         profileEmail.text = savedEmail
+
+
+        // Load saved profile photo
+
+        val savedImageUri = preferences.getString(
+            "profileImageUri",
+            null
+        )
+
+        if (savedImageUri != null) {
+
+            profileImage.setImageURI(
+                Uri.parse(savedImageUri)
+            )
+        }
     }
 }
-

@@ -1,11 +1,15 @@
 package com.example.taqreeb
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.util.Calendar
 
 class AddEventActivity : AppCompatActivity() {
 
@@ -26,7 +30,7 @@ class AddEventActivity : AppCompatActivity() {
             R.id.edtEventLocation
         )
 
-        val eventCategory = findViewById<EditText>(
+        val eventCategory = findViewById<Spinner>(
             R.id.edtEventCategory
         )
 
@@ -38,19 +42,74 @@ class AddEventActivity : AppCompatActivity() {
             R.id.btnCreateEvent
         )
 
+
+        // Date Picker
+
+        eventDate.setOnClickListener {
+
+            val calendar = Calendar.getInstance()
+
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePicker = DatePickerDialog(
+                this,
+                { _, selectedYear, selectedMonth, selectedDay ->
+
+                    val selectedDate =
+                        "$selectedDay/${selectedMonth + 1}/$selectedYear"
+
+                    eventDate.setText(selectedDate)
+                },
+                year,
+                month,
+                day
+            )
+
+            datePicker.show()
+        }
+
+
+        // Event Categories
+
+        val categories = arrayOf(
+            "Select Category",
+            "University",
+            "Business",
+            "Sports",
+            "Concerts",
+            "Weddings",
+            "Cultural"
+        )
+
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_dropdown_item,
+            categories
+        )
+
+        eventCategory.adapter = adapter
+
+
+        // Create Event
+
         createButton.setOnClickListener {
 
             val name = eventName.text.toString()
             val date = eventDate.text.toString()
             val location = eventLocation.text.toString()
-            val category = eventCategory.text.toString()
+            val category = eventCategory.selectedItem.toString()
             val description = eventDescription.text.toString()
+
+
+            // Check empty fields
 
             if (name.isEmpty() ||
                 date.isEmpty() ||
                 location.isEmpty() ||
-                category.isEmpty() ||
-                description.isEmpty()
+                description.isEmpty() ||
+                category == "Select Category"
             ) {
 
                 Toast.makeText(
@@ -61,10 +120,10 @@ class AddEventActivity : AppCompatActivity() {
 
             } else {
 
-                // Create database object
+                // Save event in SQLite
+
                 val database = DatabaseHandler(this)
 
-                // Save event into SQLite
                 database.addEvent(
                     name,
                     date,
@@ -73,26 +132,50 @@ class AddEventActivity : AppCompatActivity() {
                     description
                 )
 
-                // Keep SharedPreferences for the current app
+
+                // Save event information in SharedPreferences
+
                 val preferences = getSharedPreferences(
                     "TaqreebData",
                     Context.MODE_PRIVATE
                 )
 
                 preferences.edit()
-                    .putString("createdEventName", name)
-                    .putString("createdEventDate", date)
-                    .putString("createdEventLocation", location)
-                    .putString("createdEventCategory", category)
-                    .putString("createdEventDescription", description)
-                    .putBoolean("eventCreated", true)
+                    .putString(
+                        "createdEventName",
+                        name
+                    )
+                    .putString(
+                        "createdEventDate",
+                        date
+                    )
+                    .putString(
+                        "createdEventLocation",
+                        location
+                    )
+                    .putString(
+                        "createdEventCategory",
+                        category
+                    )
+                    .putString(
+                        "createdEventDescription",
+                        description
+                    )
+                    .putBoolean(
+                        "eventCreated",
+                        true
+                    )
                     .apply()
+
 
                 Toast.makeText(
                     this,
                     "Event saved successfully!",
                     Toast.LENGTH_SHORT
                 ).show()
+
+
+                // Close Create Event screen
 
                 finish()
             }
